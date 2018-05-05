@@ -1,0 +1,448 @@
+#include<iostream>
+using namespace std;
+int tc = 0, tp[10], i[2], bub = 0, tmp, temp = 0, temp1 = 0, qipan[15][15], tttp = 0, tttp1 = 0, hb = 0, sht = 0, sht1 = 0,q;
+string in;
+void err(void) {//错误 
+	cout << "错误！您的电脑可能被病毒入侵或内存溢出" << endl << "按回车继续。";
+	getchar();
+}//结束 
+void clean(void){//清空所有变量 
+	sht1 = 0;
+	sht=0;
+	hb=0;
+	tttp=0;
+	tttp1=0;
+	temp1=0;
+	temp=0;
+	tmp=0;
+	bub=0;
+	i[0]=0;
+	i[1]=0;
+	tp[0]=0;
+	tp[1]=0;
+	tp[2]=0;
+	tp[3]=0;
+	tp[4]=0;
+	tp[5]=0;
+	tp[6]=0;
+	tp[7]=0;
+	tp[8]=0;
+	tp[9]=0;
+	q=0;
+	tc=0; 
+}//结束 
+int rj(int){//人机对战函数 
+	do {//定义棋盘初始值 
+		do {
+			qipan[tttp][tttp1] = 0;
+		} while (tttp1 <= 11, tttp++);
+		tttp = 0;
+  	} while (tttp <= 11, tttp++);//结束 
+	do {
+		q=0;
+		    cout << "黑棋，您要下哪里？";
+		    cin >> tp[1] >> tp[2];
+		    if (qipan[tp[2] - 1][tp[1] - 1] == 0) {
+		    	qipan[tp[2] - 1][tp[1] - 1] = 1;
+		    }else {
+		    	int bt=0;
+	        	cout << "您输入的棋子与已有棋子重和，以默认为跳过。";
+    		}	
+    		cout<<"ok -51"<<endl; 
+		do {//判断对方是否可能胜利（横向） 
+			do {
+				if (qipan[sht][sht1] == 1 && qipan[sht][sht1 + 1] == 1 && qipan[sht][sht1 + 2]== 1) {
+					if(qipan[sht1][tmp + 3] == 0){
+			    	    	qipan[sht1][tmp + 3] = 2;
+			        }
+					q=1;
+				}
+			} while (sht1++, sht1<10);
+			sht1 = 0;
+		} while (sht++, sht<10);//结束 
+		if(q==0){//如果机器还没有下过 
+			do {//判断胜负（竖向） 
+		    	do {
+			    	if (qipan[sht1][sht] == 1 && qipan[sht1 + 1][sht] == 1 && qipan[sht1 + 2][sht] == 1) {
+			            if(qipan[sht1+3][sht] == 0){
+			    	    	qipan[sht1 + 3][sht] = 2;
+			    	    	q=1;
+			        	}
+			    	}
+		    	} while (sht++, sht<10);
+		    	sht = 0;
+	    	} while (sht1++, sht1<10);//结束 
+	    	sht1 = 0;//清空临时变量 
+	    	sht = 0;//清空临时变量 
+		}//结束 
+		if(q==0){//如果机器还没有下过 
+			do {//判断胜负（斜竖向）
+			do {
+				if (qipan[sht1][sht] == 1 && qipan[sht1 + 1][sht + 1] == 1 && qipan[sht1 + 2][sht + 2] == 1) {
+					if(qipan[sht1 + 3][sht + 3] == 0){
+			    	    qipan[sht1 + 3][sht + 3] = 2;
+			    	    q=1;
+			        }
+				}
+			} while (sht++, sht<10);
+			sht=0;
+		} while (sht1++, sht1<10);//结束 
+	    	sht1 = 0;//清空临时变量 
+	    	sht = 0;//清空临时变量 
+		}//结束 
+		sht1 = 0;//清空临时变量 
+	    sht = 0;//清空临时变量 
+		if(q==0){//如果机器还没有下过 
+			do {//判断胜负（斜竖向）
+		    	do {
+		        	if (qipan[sht1][sht] == 1 && qipan[sht1 - 1][sht +1] == 1 && qipan[sht1 - 2][sht + 2] == 1) {
+		        		if(qipan[sht1 - 3][sht + 3] == 0){
+			    	    	qipan[sht1 - 3][sht + 3] = 2;
+			    	    	q=1;
+			        	}
+			    	}
+		    	} while (sht++, sht<10);
+		    	sht=0;
+	        	} while (sht1++, sht1<10);//结束 
+	    }//结束 
+	    sht1 = 0;//清空临时变量 
+	    sht = 0;//清空临时变量 
+	    cout<<"ok -105"<<endl; 
+		sht = 0; //横竖列运算符清空 
+		sht1 = 0;//横竖列运算符清空 
+		int thnp=0,thnp1=0,stm,stm1,zd,iii=0;
+		if(q==0){//如果对方暂时无法取胜 
+		  
+			thnp=0;
+			thnp1=0;
+	    	do{
+		    	thnp++;
+		    	do{
+		    		thnp1++;
+		    		if(qipan[thnp][thnp1]==2){
+		    			zd=1;
+		    			if(zd==1){
+		    				if(qipan[thnp][thnp1+1]==0){
+		    					qipan[thnp][thnp1+1]=2;
+		    					goto wq; 
+							}else if(qipan[thnp][thnp1-1]==0){
+								qipan[thnp][thnp1-1]=2;
+								goto wq; 
+							}
+						}
+		    			if(qipan[thnp][thnp1]==2&&qipan[thnp][thnp1+1]==2){
+		    				zd=2;
+		    				if(qipan[thnp][thnp1+2]==0){
+		    					qipan[thnp][thnp1+2]=2;
+							}else if(qipan[thnp][thnp1-1]==0){
+								qipan[thnp][thnp1-1]=2;
+								goto wq; 
+							}
+						}
+		    			if(qipan[thnp][thnp1]==2&&qipan[thnp][thnp1+1]==2&&qipan[thnp][thnp1+2]==2){
+		    				zd=3;
+		    				if(qipan[thnp][thnp1+3]==0){
+		    					qipan[thnp][thnp1+3]=2;
+		    					goto wq; 
+							}else if(qipan[thnp][thnp1-1]==0){
+								qipan[thnp][thnp1-1]=2;
+								goto wq; 
+							}
+						}
+						if(qipan[thnp][thnp1]==2&&qipan[thnp][thnp1+1]==2&&qipan[thnp][thnp1+2]==2&&qipan[thnp][thnp1+3]==2){//如我方横向可以取胜 
+		    				zd=4;
+		    				if(qipan[thnp][thnp1+4]==0){
+		    					qipan[thnp][thnp1+4]=2;
+		    					goto wq; 
+							}else if(qipan[thnp][thnp1-1]==0){
+								qipan[thnp][thnp1-1]=2;
+								goto wq; 
+							}
+						}
+		    			q=1;
+		        	}
+				}while(thnp1<10);
+				thnp1=0;
+			}while(thnp<10);
+			if(zd>=1){
+				goto wq;
+			}
+			thnp=0;
+			thnp1=0;
+		    do{
+		    	thnp++;
+		    	do{
+		    		thnp1++;
+		    		if(qipan[thnp][thnp1]==0&&qipan[thnp][thnp1+1]==0&&qipan[thnp][thnp1+2]==0&&qipan[thnp][thnp1+3]==0&&qipan[thnp][thnp1+4]==0){
+		    			qipan[thnp][thnp+2]=2;
+		    			q=1;
+		    			goto wq;
+		        	}
+				}while(thnp1<10);
+				thnp1=0;
+			}while(thnp<10);
+			do{
+		    	thnp++;
+		    	do{
+		    		thnp1++;
+		    		if(qipan[thnp+1][thnp1]==0&&qipan[thnp+2][thnp1]==0&&qipan[thnp+3][thnp1]==0&&qipan[thnp+4][thnp1]==0&&qipan[thnp+5][thnp1]){
+		    			qipan[thnp][thnp+2]=2;
+		    			q=1;
+		    			goto wq;
+		        	}
+				}while(thnp1<10);
+				thnp1=0;
+			}while(thnp<10);
+		}//结束 
+		wq:int riughiuetg;
+		cout<<"ok -179"<<endl; 
+		do {//输出棋盘 
+			do {
+				if (qipan[temp][temp1] == 0) {
+					cout << "|";
+				}
+				else if (qipan[temp][temp1] == 1) {
+					cout << "X";
+				}
+				else if (qipan[temp][temp1] == 2) {
+					cout << "O";
+				}
+				cout << "-";
+				temp1++;
+			} while (temp1<10);
+			temp1 = 0;
+			cout << "|" << endl;
+		} while (temp++, temp<10);//输出完毕     //验证成功 
+		sht1 = 0;//清空临时变量 
+	    sht = 0;//清空临时变量 
+		do {//判断胜负（横向） 
+			do {
+				if (qipan[sht][sht1] == 1 && qipan[sht][sht1 + 1] == 1 && qipan[sht][sht1 + 2] == 1 && qipan[sht][sht1 + 3] == 1 && qipan[sht][sht1 + 4] == 1) {
+					cout << "黑棋胜利！";
+					clean();
+					return 0;
+				}
+				if (qipan[sht][sht1] == 2 && qipan[sht][sht1 + 1] == 2 && qipan[sht][sht1 + 2] == 2 && qipan[sht][sht1 + 3] == 2 && qipan[sht][sht1 + 4] == 2) {
+					cout << "白棋胜利！";
+					clean();
+					return 0;
+				}
+
+			} while (sht1++, sht1<10);
+			sht1 = 0;
+		} while (sht++, sht<10);//结束
+		cout<<"ok -194"<<endl;  
+		sht = 0; //横竖列运算符清空 
+		sht1 = 0;//横竖列运算符清空 
+		do {//判断胜负（竖向） 
+			do {
+				if (qipan[sht1][sht] == 1 && qipan[sht1 + 1][sht] == 1 && qipan[sht1 + 2][sht] == 1 && qipan[sht1 + 3][sht] == 1 &&qipan[sht1 + 4][sht] == 1) {
+					cout << "黑棋胜利！";
+					clean();
+					return 0;
+				}
+				if (qipan[sht1][sht] == 2 && qipan[sht1 + 1][sht] == 2 && qipan[sht1 + 2][sht] == 2 &&qipan[sht1 + 3][sht] == 2 && qipan[sht1 + 3][sht] == 2) {
+					cout << "白棋胜利！";
+					clean();
+					return 0;
+				}
+			} while (sht++, sht<10);
+			sht = 0;
+		} while (sht1++, sht1<10);//结束 
+		
+		sht1 = 0;//清空临时变量 
+		sht = 0;//清空临时变量 
+		/*
+		以下代码有bug（判断从1+n 1+n开始的斜线时） 
+		*/
+		cout<<"ok -216"<<endl; 
+		do {//判断胜负（斜竖向）
+			do {
+				if (qipan[sht1][tmp] == 1 && qipan[sht1 + 1][tmp + 1] == 1 && qipan[sht1 + 2][tmp + 2] == 1 && qipan[sht1 + 3][tmp + 3] == 1 && qipan[sht1 + 4][tmp + 4] == 1) {
+					cout << "黑棋胜利！";
+					clean();
+					return 0;
+				}
+				if (qipan[sht1][tmp] == 2 && qipan[sht1 + 1][tmp + 1] == 2 && qipan[sht1 + 2][tmp + 2] == 2 && qipan[sht1 + 3][tmp + 3] == 2 && qipan[sht1 + 4][tmp + 4] == 2) {
+					cout << "白棋胜利！";
+					clean();
+					return 0;
+				}
+			} while (sht++, sht<10);
+			sht=0;
+		} while (sht1++, sht1<10);//结束 
+		sht1 = 0;//清空临时变量 
+		sht = 0;//清空临时变量 
+		cout<<"ok -235"<<endl; 
+		do {//判断胜负（斜竖向）
+			do {
+				if (qipan[sht1][tmp] == 1 && qipan[sht1 - 1][tmp +1] == 1 && qipan[sht1 - 2][tmp + 2] == 1 && qipan[sht1 - 3][tmp + 3] == 1 && qipan[sht1- 4][tmp + 4] == 1) {
+					cout << "黑棋胜利！";
+					clean();
+					return 0;
+				}
+				if (qipan[sht1][tmp] == 2 && qipan[sht1 + 1][tmp - 1] == 2 && qipan[sht1 + 2][tmp - 2] == 2 && qipan[sht1 + 3][tmp - 3] == 2 && qipan[sht1 + 4][tmp - 4] == 2) {
+					cout << "白棋胜利!";
+					clean();
+					return 0;
+				}
+			} while (sht++, sht<10);
+			sht=0;
+		} while (sht1++, sht1<10);//结束 
+		sht1 = 0;//清空临时变量 
+		sht = 0;//清空临时变量 
+		temp = 0;//清空临时变量 
+		cout<<"ok -254"<<endl; 
+		//胜负计算代码结束
+		
+		q=0;
+	} while (1!=3);
+}//结束人机对战 
+
+/*
+
+
+
+
+
+开始人人对战 
+
+
+
+
+
+*/ 
+int main() {
+	
+	clean();
+	do{
+    cin>>in;
+    if(in=="rr"){
+	do {//定义棋盘初始值 
+		do {
+			qipan[tttp][tttp1] = 0;
+		} while (tttp1 <= 11, tttp++);
+		tttp = 0;
+	} while (tttp <= 11, tttp++);//结束 
+	do {
+
+		if (hb == 0) {//用户输入棋子 
+			cout << "黑棋，您要下哪里？";
+			cin >> tp[1] >> tp[2];
+			if (qipan[tp[2] - 1][tp[1] - 1] == 0) {
+				qipan[tp[2] - 1][tp[1] - 1] = 1;
+				hb = 1;//
+			}
+			else {
+				cout << "您输入的棋子与已有棋子重和，请重新输入";
+			}
+			
+		}
+		else if (hb == 1) {
+			cout << "白棋，您要下哪里？";
+			cin >> tp[1] >> tp[2];
+			if (qipan[tp[2] - 1][tp[1] - 1] == 0) {
+				qipan[tp[2] - 1][tp[1] - 1] = 2;
+				hb = 0;//
+			}
+			else {
+				cout << "您输入的棋子与已有棋子重和，请重新输入" << endl;
+			}
+		}
+		else {
+			err();
+		}//结束 
+
+		do {//输出棋盘 
+			do {
+				if (qipan[temp][temp1] == 0) {
+					cout << "|";
+				}
+				else if (qipan[temp][temp1] == 1) {
+					cout << "X";
+				}
+				else if (qipan[temp][temp1] == 2) {
+					cout << "O";
+				}
+				cout << "-";
+				temp1++;
+			} while (temp1<10);
+			temp1 = 0;
+			cout << "|" << endl;
+		} while (temp++, temp<10);//输出完毕     //验证成功 
+		do {//判断胜负（横向） 
+			do {
+				if (qipan[sht][sht1] == 1 && qipan[sht][sht1 + 1] == 1 && qipan[sht][sht1 + 2] == 1 && qipan[sht][sht1 + 3] == 1 && qipan[sht][sht1 + 4] == 1) {
+					cout << "黑棋胜利！";
+					return 0;
+				}
+				if (qipan[sht][sht1] == 2 && qipan[sht][sht1 + 1] == 2 && qipan[sht][sht1 + 2] == 2 && qipan[sht][sht1 + 3] == 2 && qipan[sht][sht1 + 4] == 2) {
+					cout << "白棋胜利！";
+					return 0;
+				}
+                
+			} while (sht1++, sht1<10);
+			sht1 = 0;
+		} while (sht++, sht<10);//结束 
+		sht = 0; //横竖列运算符清空 
+		sht1 = 0;//横竖列运算符清空 
+		do {//判断胜负（竖向） 
+			do {
+				if (qipan[sht1][sht] == 1 && qipan[sht1 + 1][sht] == 1 && qipan[sht1 + 2][sht] == 1 && qipan[sht1 + 4][sht] == 1) {
+					cout << "黑棋胜利！";
+					return 0;
+				}
+				if (qipan[sht1][sht] == 2 && qipan[sht1 + 1][sht] == 2 && qipan[sht1 + 2][sht] == 2 && qipan[sht1 + 3][sht] == 2) {
+					cout << "白棋胜利！";
+					return 0;
+				}
+			} while (sht++, sht<10);
+			sht = 0;
+		} while (sht1++, sht1<10);//结束 
+		sht1 = 0;//清空临时变量 
+		sht = 0;//清空临时变量 
+		/*
+		以下代码有bug（判断从1+n 1+n开始的斜线时） 
+		*/
+		do {//判断胜负（斜竖向）
+			do {
+				if (qipan[sht1][sht] == 1 && qipan[sht1 + 1][sht + 1] == 1 && qipan[sht1 + 2][sht + 2] == 1 && qipan[sht1 + 3][sht + 3] == 1 && qipan[sht1 + 4][sht + 4] == 1) {
+					cout << "黑棋胜利！";
+					return 0;
+				}
+				if (qipan[sht1][sht] == 2 && qipan[sht1 + 1][sht + 1] == 2 && qipan[sht1 + 2][sht + 2] == 2 && qipan[sht1 + 3][sht + 3] == 2 && qipan[sht1 + 4][sht + 4] == 2) {
+					cout << "白棋胜利！";
+					return 0;
+				}
+				
+			} while (sht++, sht<10);
+			sht=0;
+		} while (sht1++, sht1<=10);//结束 
+		sht1 = 0;//清空临时变量 
+		sht = 0;//清空临时变量 
+		do {//判断胜负（斜竖向）
+			do {
+				if (qipan[sht1][sht] == 1 && qipan[sht1 - 1][sht +1] == 1 && qipan[sht1 - 2][sht + 2] == 1 && qipan[sht1 - 3][sht + 3] == 1 && qipan[sht1- 4][sht + 4] == 1) {
+					cout << "黑棋胜利！";
+					return 0;
+				}
+				if (qipan[sht1][sht] == 2 && qipan[sht1 + 1][sht - 1] == 2 && qipan[sht1 + 2][sht - 2] == 2 && qipan[sht1 + 3][sht - 3] == 2 && qipan[sht1 + 4][sht - 4] == 2) {
+					cout << "白棋胜利!";
+					return 0;
+				}
+			} while (sht++, sht<10);
+			sht=0;
+		} while (sht1++, sht1<10);//结束 
+		sht1 = 0;//清空临时变量 
+		sht = 0;//清空临时变量 
+		temp = 0;//清空临时变量 
+		//胜负计算代码结束
+		
+	} while (tc != 2);
+    }
+    if(in=="rj"){
+    	rj(1);
+	}
+}while(in!="exit");
+}
+
